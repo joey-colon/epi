@@ -6,13 +6,31 @@ import epi.test_framework.TestFailure;
 import epi.test_framework.TimedExecutor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DutchNationalFlag {
     public enum Color {RED, WHITE, BLUE}
 
-    public static void dutchFlagPartition(int pivotIndex, List<Color> A) {
-        // TODO - you fill in here.
+    public static void dutchFlagPartition(int pivotIndex, List<Color> arr) {
+        int left = 0;
+        int right = arr.size() - 1;
+        Color c = arr.get(pivotIndex);
+        // Red = 0
+        // White = 1
+        // Blue = 2
+        for (int i = 0; i <= right; ) {
+            if (arr.get(i).ordinal() < c.ordinal()) {
+                Collections.swap(arr, i, left);
+                left++;
+                i++;
+            } else if (arr.get(i).ordinal() > c.ordinal()) {
+                Collections.swap(arr, i, right);
+                right--;
+            } else if (arr.get(i).ordinal() == c.ordinal()) {
+                i++;
+            }
+        }
         return;
     }
 
