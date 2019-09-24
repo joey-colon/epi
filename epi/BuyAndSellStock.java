@@ -8,8 +8,17 @@ import java.util.List;
 public class BuyAndSellStock {
     @EpiTest(testDataFile = "buy_and_sell_stock.tsv")
     public static double computeMaxProfit(List<Double> prices) {
-        // TODO - you fill in here.
-        return 0.0;
+        double maxProfit = 0;
+        double buyValue = -1;
+
+        for (int i = 0; i < prices.size(); i++) {
+            if (buyValue == -1 || prices.get(i) < buyValue) {
+                buyValue = prices.get(i);
+            } else {
+                maxProfit = Math.max(maxProfit, prices.get(i) - buyValue);
+            }
+        }
+        return maxProfit;
     }
 
     public static void main(String[] args) {
