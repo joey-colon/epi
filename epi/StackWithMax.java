@@ -8,27 +8,50 @@ import epi.test_framework.TestFailure;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+class StackNode {
+    public Integer value;
+    public Integer max;
+    public StackNode next = null;
+
+    public StackNode(Integer value, Integer max) {
+        this.value = value;
+        this.max = max;
+    }
+}
+
 public class StackWithMax {
 
     public static class Stack {
+        StackNode head = null;
         public boolean empty() {
-            // TODO - you fill in here.
-            return true;
+            return head == null;
         }
 
         public Integer max() {
-            // TODO - you fill in here.
-            return 0;
+            if (empty()) {
+                return null;
+            }
+            return head.max;
         }
 
         public Integer pop() {
-            // TODO - you fill in here.
-            return 0;
+            if (empty()) {
+                return null;
+            }
+            Integer value = head.value;
+            head = head.next;
+            return value;
         }
 
         public void push(Integer x) {
-            // TODO - you fill in here.
-            return;
+            if (head == null) {
+                head = new StackNode(x, x);
+                return;
+            }
+
+            StackNode newNode = new StackNode(x, Integer.max(head.max, x));
+            newNode.next = head;
+            head = newNode;
         }
     }
 
